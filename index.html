@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Placement Portal</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>
+    <h2>🎓 Student Placement Portal</h2>
+
+   <nav>
+    <a href="index.html" id="homeLink">Home</a>
+    <a href="companies.html" id="companiesLink">Companies</a>
+    <a href="drives.html" id="drivesLink">Drives</a>
+    <span id="authLinks"></span>
+</nav>
+</header>
+
+<section class="hero">
+    <h1>Build Your Career With Us</h1>
+    <p>Explore companies, placement drives and career opportunities.</p>
+
+    <a href="login.html">
+        <button>Get Started</button>
+    </a>
+</section>
+
+<section class="features">
+
+    <div class="card">
+        <h3>🏢 Companies</h3>
+        <p>Explore companies visiting our campus.</p>
+    </div>
+
+    <div class="card">
+        <h3>💼 Job Opportunities</h3>
+        <p>Find suitable placement opportunities.</p>
+    </div>
+
+    <div class="card">
+        <h3>📊 Track Applications</h3>
+        <p>Track your placement application status.</p>
+    </div>
+
+</section>
+
+<footer>
+    <p>© 2026 Student Placement Portal</p>
+</footer>
+
+<script>
+
+function updateNavigation() {
+
+    let currentPage = window.location.pathname.split("/").pop();
+
+document.getElementById("homeLink").classList.toggle(
+    "active",
+    currentPage === "index.html" || currentPage === ""
+);
+
+document.getElementById("companiesLink").classList.toggle(
+    "active",
+    currentPage === "companies.html"
+);
+
+document.getElementById("drivesLink").classList.toggle(
+    "active",
+    currentPage === "drives.html"
+);
+
+    let authLinks = document.getElementById("authLinks");
+
+    if (localStorage.getItem("loggedIn") === "true") {
+
+        authLinks.innerHTML = `
+            <a href="dashboard.html">Dashboard</a>
+            <a href="applications.html">My Applications</a>
+            <a href="profile.html">My Profile</a>
+            <a href="#" onclick="logout()">Logout</a>
+        `;
+
+    } else if (localStorage.getItem("adminLoggedIn") === "true") {
+
+        authLinks.innerHTML = `
+            <a href="admin.html">Admin Dashboard</a>
+            <a href="#" onclick="adminLogout()">Logout</a>
+        `;
+
+    } else {
+
+        authLinks.innerHTML = `
+            <a href="login.html">Login</a>
+            <a href="admin-login.html">Admin</a>
+        `;
+    }
+}
+
+function adminLogout() {
+
+    localStorage.removeItem("adminLoggedIn");
+
+    alert("Admin logged out successfully.");
+
+    window.location.href = "index.html";
+}
+
+updateNavigation();
+
+</script>
+
+</body>
+</html>

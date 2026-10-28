@@ -1,0 +1,1066 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f7fb;
+}
+
+header {
+    background-color: #1e3a8a;
+    color: white;
+    padding: 20px 50px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin-left: 25px;
+}
+
+.hero {
+    text-align: center;
+    padding: 80px 20px;
+}
+
+.hero h1 {
+    font-size: 40px;
+    margin-bottom: 15px;
+}
+
+.hero p {
+    font-size: 18px;
+    margin-bottom: 25px;
+}
+
+button {
+    background-color: #1e3a8a;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.features {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    padding: 30px;
+}
+
+.card {
+    background-color: white;
+    width: 280px;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+}
+
+.card h3 {
+    margin-bottom: 15px;
+}
+
+footer {
+    text-align: center;
+    padding: 30px;
+    margin-top: 50px;
+}
+
+/* Login Page */
+
+.login-container {
+    min-height: 650px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-card {
+    background-color: white;
+    width: 400px;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.12);
+    text-align: center;
+}
+
+.login-icon {
+    font-size: 45px;
+    margin-bottom: 10px;
+}
+
+.login-card h1 {
+    margin-bottom: 10px;
+}
+
+.login-subtitle {
+    color: #666;
+    margin-bottom: 30px;
+}
+
+.login-card form {
+    text-align: left;
+}
+
+.login-card label {
+    display: block;
+    margin-bottom: 7px;
+    font-weight: bold;
+}
+
+.login-card input[type="email"],
+.login-card input[type="password"] {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+.password-box {
+    position: relative;
+    width: 100%;
+    height: 46px;
+}
+
+.password-box input {
+    width: 100%;
+    height: 46px;
+    padding: 12px 45px 12px 14px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 16px;
+    box-sizing: border-box;
+    text-align: left;
+}
+
+.password-box span {
+    position: absolute;
+    right: 14px;
+    top: 23px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    font-size: 18px;
+    line-height: 1;
+    z-index: 2;
+}
+
+.login-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    font-size: 14px;
+}
+
+.login-options a,
+.register-text a {
+    color: #1e3a8a;
+    text-decoration: none;
+}
+
+.remember {
+    display: flex !important;
+    align-items: center;
+    gap: 5px;
+    font-weight: normal !important;
+}
+
+.remember input {
+    width: auto;
+}
+
+.login-button {
+    width: 100%;
+    padding: 13px;
+    font-size: 16px;
+    border-radius: 7px;
+}
+
+.login-button:hover {
+    background-color: #162d6b;
+}
+
+.register-text {
+    margin-top: 25px;
+    color: #666;
+    font-size: 14px;
+}
+
+/* Dashboard */
+
+.dashboard {
+    padding: 40px 8%;
+}
+
+.welcome {
+    margin-bottom: 30px;
+}
+
+.welcome h1 {
+    font-size: 32px;
+    margin-bottom: 8px;
+}
+
+.welcome p {
+    color: #666;
+}
+
+.dashboard-cards {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-bottom: 40px;
+}
+
+.dashboard-cards .card {
+    background-color: white;
+    flex: 1;
+    min-width: 200px;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+}
+
+.dashboard-cards .card h2 {
+    color: #1e3a8a;
+    font-size: 32px;
+    margin: 10px 0;
+}
+
+.dashboard-cards .card p {
+    color: #666;
+}
+
+.dashboard-section {
+    background-color: white;
+    padding: 25px;
+    margin-bottom: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+}
+
+.dashboard-section h2 {
+    margin-bottom: 20px;
+}
+
+.drive-item,
+.application-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.drive-item:last-child,
+.application-item:last-child {
+    border-bottom: none;
+}
+
+.drive-item h3 {
+    margin-bottom: 5px;
+}
+
+.drive-item p {
+    color: #666;
+}
+
+.drive-item span {
+    color: #1e3a8a;
+    font-weight: bold;
+}
+
+.status {
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+}
+
+.applied {
+    background-color: #e0f2fe;
+    color: #0369a1;
+}
+
+.shortlisted {
+    background-color: #dcfce7;
+    color: #166534;
+}
+
+.pending {
+    background-color: #fef3c7;
+    color: #92400e;
+}
+
+/* Drives Page */
+
+.drives-page {
+    padding: 50px 8%;
+    text-align: center;
+}
+
+.drives-page h1 {
+    font-size: 35px;
+    margin-bottom: 10px;
+}
+
+.drives-page > p {
+    color: #666;
+    margin-bottom: 35px;
+}
+
+.drive-cards {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+    text-align: left;
+}
+
+.drive-card {
+    background-color: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+}
+
+.drive-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.drive-card h2 {
+    color: #1e3a8a;
+}
+
+.drive-card h3 {
+    margin-bottom: 18px;
+}
+
+.drive-card p {
+    margin: 10px 0;
+    color: #555;
+}
+
+.drive-card button {
+    width: 100%;
+    margin-top: 15px;
+    padding: 12px;
+    background-color: #1e3a8a;
+    color: white;
+    border: none;
+    border-radius: 7px;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+.drive-card button:hover {
+    background-color: #162d6b;
+}
+
+.status {
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+}
+
+.status.open {
+    background-color: #dcfce7;
+    color: #166534;
+}
+
+/* Applications Page */
+
+.applications-page {
+    padding: 50px 8%;
+    text-align: center;
+}
+
+.applications-page h1 {
+    font-size: 35px;
+    margin-bottom: 10px;
+}
+
+.applications-page > p {
+    color: #666;
+    margin-bottom: 35px;
+}
+
+.applications-table {
+    background-color: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th,
+td {
+    padding: 18px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+}
+
+th {
+    background-color: #f5f7fb;
+    color: #1e3a8a;
+}
+
+tr:last-child td {
+    border-bottom: none;
+}
+
+/* Profile Page */
+
+.profile-page {
+    padding: 50px 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.profile-card {
+    background-color: white;
+    width: 500px;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 5px 25px rgba(0,0,0,0.1);
+}
+
+.profile-icon {
+    text-align: center;
+    font-size: 50px;
+    margin-bottom: 10px;
+}
+
+.profile-card h1 {
+    text-align: center;
+    margin-bottom: 8px;
+}
+
+.profile-subtitle {
+    text-align: center;
+    color: #666;
+    margin-bottom: 30px;
+}
+
+.profile-card label {
+    display: block;
+    margin-bottom: 7px;
+    font-weight: bold;
+}
+
+.profile-card input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+.save-button {
+    width: 100%;
+    margin-top: 5px;
+    padding: 13px;
+    font-size: 16px;
+}
+
+.resume-name {
+    color: #666;
+    font-size: 14px;
+    margin-top: -10px;
+    margin-bottom: 20px;
+}
+
+
+/* Company Details */
+
+.company-details {
+    padding: 50px 8%;
+    max-width: 1000px;
+    margin: auto;
+}
+
+.company-title {
+    background-color: white;
+    padding: 35px;
+    border-radius: 12px;
+    text-align: center;
+    margin-bottom: 25px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+}
+
+.company-title h1 {
+    color: #1e3a8a;
+    margin-bottom: 15px;
+}
+
+.company-title p {
+    color: #666;
+    line-height: 1.6;
+}
+
+.details-card {
+    background-color: white;
+    padding: 25px;
+    margin-bottom: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+}
+
+.details-card h2 {
+    color: #1e3a8a;
+    margin-bottom: 18px;
+}
+
+.details-card p {
+    margin: 10px 0;
+    color: #555;
+}
+
+.details-card ul,
+.details-card ol {
+    padding-left: 25px;
+    color: #555;
+}
+
+.details-card li {
+    margin-bottom: 10px;
+}
+
+.skill-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.skill-list span {
+    background-color: #e8eefc;
+    color: #1e3a8a;
+    padding: 8px 14px;
+    border-radius: 20px;
+    font-size: 14px;
+}
+
+.apply-section {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.apply-section button {
+    padding: 14px 30px;
+    font-size: 16px;
+}
+
+
+.status {
+    padding: 6px 12px;
+    border-radius: 15px;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.status.applied {
+    background-color: #e8eefc;
+    color: #1e3a8a;
+}
+
+.status.shortlisted {
+    background-color: #fff3cd;
+    color: #856404;
+}
+
+.status.selected {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.status.rejected {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+
+/* Admin Dashboard */
+
+.admin-page {
+    padding: 50px 8%;
+}
+
+.admin-title {
+    text-align: center;
+    margin-bottom: 35px;
+}
+
+.admin-title h1 {
+    color: #1e3a8a;
+    margin-bottom: 10px;
+}
+
+.admin-title p {
+    color: #666;
+}
+
+.admin-stats {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-bottom: 40px;
+}
+
+.admin-stats .card {
+    width: 220px;
+    text-align: center;
+}
+
+.admin-stats .card h2 {
+    color: #1e3a8a;
+    margin-top: 12px;
+}
+
+.admin-section {
+    background-color: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    overflow-x: auto;
+}
+
+.admin-section h2 {
+    color: #1e3a8a;
+    margin-bottom: 25px;
+}
+
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.admin-table th,
+.admin-table td {
+    padding: 14px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.admin-table th {
+    background-color: #1e3a8a;
+    color: white;
+}
+
+.admin-table select {
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#adminUsername {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    margin-bottom: 10px;
+}
+
+
+
+/* =========================================
+   STUDENT PLACEMENT PORTAL - GLASS DESIGN
+   ========================================= */
+
+/* Background for all pages */
+
+body {
+    background-image:
+        linear-gradient(
+            rgba(10, 35, 70, 0.30),
+            rgba(10, 35, 70, 0.30)
+        ),
+        url("images/placement-background.png");
+
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+}
+
+
+/* =========================================
+   NAVBAR
+   ========================================= */
+
+header {
+    background-color: #1e3a8a;
+    color: white;
+}
+
+header h1 {
+    color: white;
+}
+
+nav a {
+    color: white;
+}
+
+
+/* =========================================
+   GLASS CARDS - ALL PAGES
+   ========================================= */
+
+.card {
+    background: rgba(255, 255, 255, 0.72);
+
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+
+    border: 1px solid rgba(255, 255, 255, 0.65);
+
+    box-shadow:
+        0 8px 25px rgba(0, 0, 0, 0.18);
+}
+
+
+/* Keep normal text readable */
+
+.card h1,
+.card h2,
+.card h3,
+.card h4,
+.card p {
+    color: #222;
+}
+
+
+/* Company / section headings */
+
+.card h2,
+.card h3 {
+    color: #1e3a8a;
+}
+
+
+/* =========================================
+   HERO SECTION
+   ========================================= */
+
+.hero {
+    background: transparent;
+    color: white;
+}
+
+.hero h1 {
+    color: white;
+    text-shadow: 0 3px 8px rgba(0, 0, 0, 0.7);
+}
+
+.hero p {
+    color: white;
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.7);
+}
+
+
+/* =========================================
+   FEATURES / CARD SECTIONS
+   ========================================= */
+
+.features {
+    background: transparent;
+}
+
+
+/* =========================================
+   BUTTONS
+   ========================================= */
+
+button {
+    background-color: #1e3a8a;
+    color: white;
+}
+
+button:hover {
+    background-color: #162d6b;
+}
+
+
+/* =========================================
+   FOOTER
+   ========================================= */
+
+footer {
+    color: white;
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.7);
+}
+
+
+
+/* =========================================
+   FINAL GLASS STYLE FOR ALL PAGES
+   ========================================= */
+
+/* ---------- Main Background ---------- */
+
+body {
+    background-image:
+        linear-gradient(
+            rgba(10, 35, 70, 0.25),
+            rgba(10, 35, 70, 0.25)
+        ),
+        url("images/placement-background.png");
+
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+}
+
+
+/* ---------- Navbar ---------- */
+
+header {
+    background-color: #1e3a8a;
+    color: white;
+}
+
+header h1,
+nav a {
+    color: white;
+}
+
+
+/* =========================================
+   GLASS EFFECT
+   ========================================= */
+
+/* Home cards */
+.card,
+
+/* Drives */
+.drive-card,
+
+/* Applications */
+.applications-table,
+
+/* Profile */
+.profile-card,
+
+/* Login */
+.login-card,
+
+/* Dashboard sections */
+.dashboard-section,
+
+/* Company details */
+.company-title,
+.details-card,
+
+/* Admin */
+.admin-section {
+    background: rgba(255, 255, 255, 0.68);
+
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+
+    border: 1px solid rgba(255, 255, 255, 0.55);
+
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.18);
+}
+
+
+/* =========================================
+   KEEP TEXT READABLE
+   ========================================= */
+
+.card,
+.drive-card,
+.applications-table,
+.profile-card,
+.login-card,
+.dashboard-section,
+.company-title,
+.details-card,
+.admin-section {
+    color: #222;
+}
+
+
+/* Normal headings */
+
+.card h3,
+.drive-card h3,
+.login-card h1,
+.profile-card h1,
+.company-title h1,
+.details-card h2,
+.dashboard-section h2,
+.admin-section h2 {
+    color: #1e3a8a;
+}
+
+
+/* Normal paragraphs */
+
+.card p,
+.drive-card p,
+.profile-card p,
+.login-card p,
+.dashboard-section p,
+.company-title p,
+.details-card p,
+.details-card li,
+.admin-section p {
+    color: #444;
+}
+
+
+/* =========================================
+   PAGE TITLES OVER BACKGROUND
+   ========================================= */
+
+.drives-page h1,
+.applications-page h1 {
+    color: white;
+    text-shadow: 0 3px 8px rgba(0, 0, 0, 0.75);
+}
+
+.drives-page > p,
+.applications-page > p {
+    color: white;
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.65);
+}
+
+
+/* Dashboard welcome */
+
+.welcome h1 {
+    color: white;
+    text-shadow: 0 3px 8px rgba(0, 0, 0, 0.75);
+}
+
+.welcome p {
+    color: white;
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.65);
+}
+
+
+/* Admin title */
+
+.admin-title h1 {
+    color: white;
+    text-shadow: 0 3px 8px rgba(0, 0, 0, 0.75);
+}
+
+.admin-title p {
+    color: white;
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.65);
+}
+
+
+/* =========================================
+   HERO
+   ========================================= */
+
+.hero {
+    background: transparent;
+}
+
+.hero h1 {
+    color: white;
+    text-shadow: 0 3px 8px rgba(0, 0, 0, 0.75);
+}
+
+.hero p {
+    color: white;
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.65);
+}
+
+
+/* =========================================
+   KEEP INPUTS WHITE & READABLE
+   ========================================= */
+
+input,
+select {
+    background-color: white;
+    color: #222;
+}
+
+
+/* =========================================
+   KEEP TABLE HEADERS BLUE
+   ========================================= */
+
+th,
+.admin-table th {
+    background-color: #1e3a8a;
+    color: white;
+}
+
+
+/* =========================================
+   BUTTONS
+   ========================================= */
+
+button {
+    background-color: #1e3a8a;
+    color: white;
+}
+
+button:hover {
+    background-color: #162d6b;
+}
+
+
+/* =========================================
+   FOOTER
+   ========================================= */
+
+footer {
+    color: white;
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.75);
+}
+
+/* Dashboard statistic cards - Glass Effect */
+
+.dashboard-cards .card {
+    background: rgba(255, 255, 255, 0.68);
+
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+
+    border: 1px solid rgba(255, 255, 255, 0.55);
+
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.18);
+}
+
+.dashboard-cards .card h2 {
+    color: #1e3a8a;
+}
+
+.dashboard-cards .card p {
+    color: #666;
+}
+
+nav a.active {
+    background-color: rgba(0, 0, 0, 0.25);
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-weight: bold;
+}

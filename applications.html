@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>My Applications - Student Placement Portal</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>
+    <h2>🎓 Student Placement Portal</h2>
+
+    <nav>
+    <a href="index.html">Home</a>
+    <a href="companies.html">Companies</a>
+    <a href="drives.html">Drives</a>
+
+    <span id="authLinks"></span>
+    
+</nav>
+</header>
+
+<section class="applications-page">
+
+    <h1>📄 My Applications</h1>
+    <p>Track the placement drives you have applied for.</p>
+
+    <div class="applications-table">
+
+        <table>
+
+            <thead>
+                    <tr>
+                        <th>Company</th>
+                        <th>Role</th>
+                        <th>Applied Date</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                </tr>
+            </thead>
+
+            <tbody id="applicationList">
+
+</tbody>
+
+        </table>
+
+    </div>
+
+</section>
+
+<footer>
+    <p>© 2026 Student Placement Portal</p>
+</footer>
+
+<script>
+
+function logout() {
+
+    localStorage.removeItem("loggedIn");
+
+    alert("You have been logged out successfully.");
+
+    window.location.href = "index.html";
+}    
+
+function updateNavigation() {
+    let authLinks = document.getElementById("authLinks");
+
+    let currentPage = window.location.pathname.split("/").pop();
+
+    if (localStorage.getItem("loggedIn") === "true") {
+        authLinks.innerHTML = `
+            <a href="dashboard.html" class="${currentPage === 'dashboard.html' ? 'active' : ''}">Dashboard</a>
+            <a href="applications.html" class="${currentPage === 'applications.html' ? 'active' : ''}">My Applications</a>
+            <a href="profile.html" class="${currentPage === 'profile.html' ? 'active' : ''}">My Profile</a>
+            <a href="#" onclick="logout()">Logout</a>
+        `;
+    } else if (localStorage.getItem("adminLoggedIn") === "true") {
+        authLinks.innerHTML = `
+            <a href="admin.html" class="${currentPage === 'admin.html' ? 'active' : ''}">Admin Dashboard</a>
+            <a href="#" onclick="adminLogout()">Logout</a>
+        `;
+    } else {
+        authLinks.innerHTML = `
+            <a href="login.html" class="${currentPage === 'login.html' ? 'active' : ''}">Login</a>
+            <a href="admin-login.html" class="${currentPage === 'admin-login.html' ? 'active' : ''}">Admin</a>
+        `;
+    }
+}
+
+
+function adminLogout() {
+
+    localStorage.removeItem("adminLoggedIn");
+
+    alert("Admin logged out successfully.");
+
+    window.location.href = "index.html";
+}
+
+updateNavigation();
+
+</script>
+<script>
+
+
+if (localStorage.getItem("loggedIn") !== "true") {
+    window.location.href = "login.html";
+}
+
+
+function loadApplications() {
+
+    let applications =
+        JSON.parse(localStorage.getItem("applications")) || [];
+
+    let applicationList =
+        document.getElementById("applicationList");
+
+    if (applications.length === 0) {
+
+        applicationList.innerHTML = `
+            <tr>
+                <td colspan="5">
+                    No applications yet.
+                </td>
+            </tr>
+        `;
+
+        return;
+    }
+
+    applicationList.innerHTML = "";
+
+    applications.forEach(function(application) {
+
+        let row = `
+            <tr>
+                <td>${application.company}</td>
+                <td>${application.role}</td>
+                <td>${application.date}</td>
+                <td>
+                    <span class="status ${application.status.toLowerCase()}">
+                        ${application.status}
+                    </span>
+                </td>
+                <td>
+                    <button onclick="withdrawApplication('${application.company}')">
+                        Withdraw
+                    </button>
+                </td>
+            </tr>
+        `;
+
+        applicationList.innerHTML += row;
+    });
+}
+
+function withdrawApplication(company) {
+
+    let confirmWithdraw =
+        confirm("Are you sure you want to withdraw your application to " + company + "?");
+
+    if (!confirmWithdraw) {
+        return;
+    }
+
+    let applications =
+        JSON.parse(localStorage.getItem("applications")) || [];
+
+    applications = applications.filter(function(application) {
+        return application.company !== company;
+    });
+
+    localStorage.setItem(
+        "applications",
+        JSON.stringify(applications)
+    );
+
+    alert("Application withdrawn successfully.");
+
+    loadApplications();
+}
+
+loadApplications();
+
+loadApplications();
+
+</script>
+
+</body>
+</html>

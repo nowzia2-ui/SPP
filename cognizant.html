@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cognizant - Company Details</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>
+    <h2>🎓 Student Placement Portal</h2>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="companies.html">Companies</a>
+        <a href="drives.html">Drives</a>
+        <span id="authLinks"></span>
+        
+    </nav>
+</header>
+
+<section class="company-details">
+
+    <div class="company-title">
+        <h1>🏢 Cognizant</h1>
+        <p>
+            Cognizant is a global technology and professional
+            services company providing digital and IT solutions.
+        </p>
+    </div>
+
+    <div class="details-card">
+        <h2>💼 Job Information</h2>
+        <p><strong>Role:</strong> Software Engineer</p>
+        <p><strong>Package:</strong> ₹6 LPA</p>
+        <p><strong>Location:</strong> Campus</p>
+        <p><strong>Employment:</strong> Full Time</p>
+    </div>
+
+    <div class="details-card">
+        <h2>🎓 Eligibility</h2>
+        <ul>
+            <li>Minimum CGPA: 7.0</li>
+            <li>Computer Science / IT students</li>
+            <li>No active backlogs</li>
+            <li>Good programming fundamentals</li>
+        </ul>
+    </div>
+
+    <div class="details-card">
+        <h2>🛠️ Skills Required</h2>
+
+        <div class="skill-list">
+            <span>Java</span>
+            <span>Python</span>
+            <span>SQL</span>
+            <span>HTML</span>
+            <span>Data Structures</span>
+            <span>Problem Solving</span>
+        </div>
+    </div>
+
+    <div class="details-card">
+        <h2>📋 Selection Process</h2>
+
+        <ol>
+            <li>Online Assessment</li>
+            <li>Technical Interview</li>
+            <li>HR Interview</li>
+            <li>Final Selection</li>
+        </ol>
+    </div>
+
+    <div class="apply-section">
+        <button type="button" onclick="applyCompany('Cognizant', 'Software Engineer')">
+            Apply for this Drive
+        </button>
+    </div>
+
+</section>
+
+<footer>
+    <p>© 2026 Student Placement Portal</p>
+</footer>
+
+<script>
+
+if (localStorage.getItem("loggedIn") !== "true") {
+    window.location.href = "login.html";
+}
+
+function applyCompany(company, role) {
+
+    if (localStorage.getItem("loggedIn") !== "true") {
+        alert("Please login before applying.");
+        window.location.href = "login.html";
+        return;
+    }
+
+    let applications =
+        JSON.parse(localStorage.getItem("applications")) || [];
+
+    let alreadyApplied = applications.some(function(application) {
+        return application.company === company;
+    });
+
+    if (alreadyApplied) {
+        alert("You have already applied to " + company + ".");
+        window.location.href = "applications.html";
+        return;
+    }
+
+    let today = new Date();
+
+    let appliedDate = today.toLocaleDateString("en-GB", {
+        day: "2-digit",
+        month: "short",
+        year: "numeric"
+    });
+
+    let application = {
+        company: company,
+        role: role,
+        date: appliedDate,
+        status: "Applied"
+    };
+
+    applications.push(application);
+
+    localStorage.setItem(
+        "applications",
+        JSON.stringify(applications)
+    );
+
+    window.location.href = "applications.html";
+}
+
+function logout() {
+
+    localStorage.removeItem("loggedIn");
+
+    alert("You have been logged out successfully.");
+
+    window.location.href = "index.html";
+}
+
+function updateNavigation() {
+
+    let authLinks = document.getElementById("authLinks");
+
+    if (localStorage.getItem("loggedIn") === "true") {
+
+        authLinks.innerHTML = `
+            <a href="dashboard.html">Dashboard</a>
+            <a href="applications.html">My Applications</a>
+            <a href="profile.html">My Profile</a>
+            <a href="#" onclick="logout()">Logout</a>
+        `;
+
+    } else if (localStorage.getItem("adminLoggedIn") === "true") {
+
+        authLinks.innerHTML = `
+            <a href="admin.html">Admin Dashboard</a>
+            <a href="#" onclick="adminLogout()">Logout</a>
+        `;
+
+    } else {
+
+        authLinks.innerHTML = `
+            <a href="login.html">Login</a>
+            <a href="admin-login.html">Admin</a>
+        `;
+    }
+}
+
+function adminLogout() {
+
+    localStorage.removeItem("adminLoggedIn");
+
+    alert("Admin logged out successfully.");
+
+    window.location.href = "index.html";
+}
+
+updateNavigation();
+
+</script>
+
+</body>
+</html>

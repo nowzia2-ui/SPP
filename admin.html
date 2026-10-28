@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Dashboard - Student Placement Portal</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>
+    <h2>🎓 Student Placement Portal</h2>
+
+    <nav>
+    <a href="index.html">Home</a>
+    <a href="companies.html">Companies</a>
+    <a href="drives.html">Drives</a>
+    <span id="authLinks"></span>
+</nav>
+</header>
+
+<section class="admin-page">
+
+    <div class="admin-title">
+        <h1>👨‍💼 Placement Officer Dashboard</h1>
+        <p>Manage student placement applications and update their status.</p>
+    </div>
+
+    <div class="admin-stats">
+
+        <div class="card">
+            <h3>📄 Total Applications</h3>
+            <h2 id="totalApplications">0</h2>
+        </div>
+
+        <div class="card">
+            <h3>🟡 Applied</h3>
+            <h2 id="appliedCount">0</h2>
+        </div>
+
+        <div class="card">
+            <h3>🔵 Shortlisted</h3>
+            <h2 id="shortlistedCount">0</h2>
+        </div>
+
+        <div class="card">
+            <h3>🟢 Selected</h3>
+            <h2 id="selectedCount">0</h2>
+        </div>
+
+    </div>
+
+    <div class="admin-section">
+
+        <h2>📋 Student Applications</h2>
+
+        <table class="admin-table">
+
+            <thead>
+                <tr>
+                    <th>Company</th>
+                    <th>Role</th>
+                    <th>Applied Date</th>
+                    <th>Status</th>
+                    <th>Update Status</th>
+                </tr>
+            </thead>
+
+            <tbody id="adminApplicationList"></tbody>
+
+        </table>
+
+    </div>
+
+</section>
+
+<footer>
+    <p>© 2026 Student Placement Portal</p>
+</footer>
+
+<script>
+
+
+if (localStorage.getItem("adminLoggedIn") !== "true") {
+    window.location.href = "admin-login.html";
+}
+
+
+function loadAdminApplications() {
+
+    let applications =
+        JSON.parse(localStorage.getItem("applications")) || [];
+
+    document.getElementById("totalApplications").textContent =
+        applications.length;
+
+    let applied = 0;
+    let shortlisted = 0;
+    let selected = 0;
+
+    applications.forEach(function(application) {
+
+        if (application.status === "Applied") {
+            applied++;
+        }
+
+        if (application.status === "Shortlisted") {
+            shortlisted++;
+        }
+
+        if (application.status === "Selected") {
+            selected++;
+        }
+    });
+
+    document.getElementById("appliedCount").textContent = applied;
+    document.getElementById("shortlistedCount").textContent = shortlisted;
+    document.getElementById("selectedCount").textContent = selected;
+
+    let applicationList =
+        document.getElementById("adminApplicationList");
+
+    if (applications.length === 0) {
+
+        applicationList.innerHTML = `
+            <tr>
+                <td colspan="5">
+                    No applications available.
+                </td>
+            </tr>
+        `;
+
+        return;
+    }
+
+    applicationList.innerHTML = "";
+
+    applications.forEach(function(application, index) {
+
+        let row = `
+            <tr>
+                <td>${application.company}</td>
+
+                <td>${application.role}</td>
+
+                <td>${application.date}</td>
+
+                <td>
+                    <span class="status ${application.status.toLowerCase()}">
+                        ${application.status}
+                    </span>
+                </td>
+
+                <td>
+                    <select onchange="updateStatus(${index}, this.value)">
+                        <option value="Applied"
+                            ${application.status === "Applied" ? "selected" : ""}>
+                            Applied
+                        </option>
+
+                        <option value="Shortlisted"
+                            ${application.status === "Shortlisted" ? "selected" : ""}>
+                            Shortlisted
+                        </option>
+
+                        <option value="Selected"
+                            ${application.status === "Selected" ? "selected" : ""}>
+                            Selected
+                        </option>
+
+                        <option value="Rejected"
+                            ${application.status === "Rejected" ? "selected" : ""}>
+                            Rejected
+                        </option>
+                    </select>
+                </td>
+            </tr>
+        `;
+
+        applicationList.innerHTML += row;
+    });
+}
+
+
+function updateStatus(index, newStatus) {
+
+    let applications =
+        JSON.parse(localStorage.getItem("applications")) || [];
+
+    applications[index].status = newStatus;
+
+    localStorage.setItem(
+        "applications",
+        JSON.stringify(applications)
+    );
+
+    alert("Application status updated to " + newStatus + ".");
+
+    loadAdminApplications();
+}
+
+loadAdminApplications();
+
+function updateNavigation() {
+    let authLinks = document.getElementById("authLinks");
+
+    let currentPage = window.location.pathname.split("/").pop();
+
+    if (localStorage.getItem("loggedIn") === "true") {
+        authLinks.innerHTML = `
+            <a href="dashboard.html" class="${currentPage === 'dashboard.html' ? 'active' : ''}">Dashboard</a>
+            <a href="applications.html" class="${currentPage === 'applications.html' ? 'active' : ''}">My Applications</a>
+            <a href="profile.html" class="${currentPage === 'profile.html' ? 'active' : ''}">My Profile</a>
+            <a href="#" onclick="logout()">Logout</a>
+        `;
+    } else if (localStorage.getItem("adminLoggedIn") === "true") {
+        authLinks.innerHTML = `
+            <a href="admin.html" class="${currentPage === 'admin.html' ? 'active' : ''}">Admin Dashboard</a>
+            <a href="#" onclick="adminLogout()">Logout</a>
+        `;
+    } else {
+        authLinks.innerHTML = `
+            <a href="login.html" class="${currentPage === 'login.html' ? 'active' : ''}">Login</a>
+            <a href="admin-login.html" class="${currentPage === 'admin-login.html' ? 'active' : ''}">Admin</a>
+        `;
+    }
+}
+
+function logout() {
+
+    localStorage.removeItem("adminLoggedIn");
+
+    alert("Admin logged out successfully.");
+
+    window.location.href = "index.html";
+}
+
+updateNavigation();
+
+
+loadAdminApplications();
+
+</script>
+
+</body>
+</html>

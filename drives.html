@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Placement Drives - Student Placement Portal</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>
+    <h2>🎓 Student Placement Portal</h2>
+
+   <nav>
+    <a href="index.html" id="homeLink">Home</a>
+    <a href="companies.html" id="companiesLink">Companies</a>
+    <a href="drives.html" id="drivesLink">Drives</a>
+    <span id="authLinks"></span>
+</nav>
+</header>
+
+<section class="drives-page">
+
+    <h1>📅 Placement Drives</h1>
+
+    <p>Explore upcoming placement opportunities and apply for suitable roles.</p>
+
+    <div class="drive-cards">
+
+        <!-- TCS -->
+
+        <div class="drive-card">
+
+            <div class="drive-header">
+                <h2>TCS</h2>
+                <span class="status open">Open</span>
+            </div>
+
+            <h3>Software Developer</h3>
+
+            <p>💰 Package: ₹7 LPA</p>
+            <p>🎓 Eligibility: CGPA 7.0+</p>
+            <p>📅 Drive Date: 15 Sep 2026</p>
+            <p>📍 Location: Campus</p>
+
+            <button onclick="apply('TCS', 'Software Developer')">Apply Now</button>
+
+        </div>
+
+
+        <!-- Infosys -->
+
+        <div class="drive-card">
+
+            <div class="drive-header">
+                <h2>Infosys</h2>
+                <span class="status open">Open</span>
+            </div>
+
+            <h3>System Engineer</h3>
+
+            <p>💰 Package: ₹6.5 LPA</p>
+            <p>🎓 Eligibility: CGPA 7.0+</p>
+            <p>📅 Drive Date: 18 Sep 2026</p>
+            <p>📍 Location: Campus</p>
+
+            <button onclick="apply('Infosys', 'System Engineer')">Apply Now</button>
+
+        </div>
+
+
+        <!-- Wipro -->
+
+        <div class="drive-card">
+
+            <div class="drive-header">
+                <h2>Wipro</h2>
+                <span class="status open">Open</span>
+            </div>
+
+            <h3>Graduate Engineer Trainee</h3>
+
+            <p>💰 Package: ₹5.5 LPA</p>
+            <p>🎓 Eligibility: CGPA 6.5+</p>
+            <p>📅 Drive Date: 22 Sep 2026</p>
+            <p>📍 Location: Campus</p>
+
+            <button onclick="apply('Wipro', 'Graduate Engineer Trainee')">Apply Now</button>
+
+        </div>
+
+
+        <!-- Accenture -->
+
+        <div class="drive-card">
+
+            <div class="drive-header">
+                <h2>Accenture</h2>
+                <span class="status open">Open</span>
+            </div>
+
+            <h3>Associate Software Engineer</h3>
+
+            <p>💰 Package: ₹6 LPA</p>
+            <p>🎓 Eligibility: CGPA 7.0+</p>
+            <p>📅 Drive Date: 25 Sep 2026</p>
+            <p>📍 Location: Campus</p>
+
+            <button onclick="apply('Accenture', 'Associate Software Engineer')">Apply Now</button>
+
+        </div>
+
+    </div>
+
+</section>
+
+<footer>
+    <p>© 2026 Student Placement Portal</p>
+</footer>
+
+
+<script>
+    
+function logout() {
+
+    localStorage.removeItem("loggedIn");
+
+    alert("You have been logged out successfully.");
+
+    window.location.href = "index.html";
+}
+
+
+function updateNavigation() {
+
+    let authLinks = document.getElementById("authLinks");
+
+    if (localStorage.getItem("loggedIn") === "true") {
+
+        authLinks.innerHTML = `
+            <a href="dashboard.html">Dashboard</a>
+            <a href="applications.html">My Applications</a>
+            <a href="profile.html">My Profile</a>
+            <a href="#" onclick="logout()">Logout</a>
+        `;
+
+    } else if (localStorage.getItem("adminLoggedIn") === "true") {
+
+        authLinks.innerHTML = `
+            <a href="admin.html">Admin Dashboard</a>
+            <a href="#" onclick="adminLogout()">Logout</a>
+        `;
+
+    } else {
+
+        authLinks.innerHTML = `
+            <a href="login.html">Login</a>
+            <a href="admin-login.html">Admin</a>
+        `;
+    }
+
+    // Get the current page
+    let currentPage = window.location.pathname
+        .split("/")
+        .pop()
+        .replace(".html", "");
+
+    if (currentPage === "") {
+        currentPage = "index";
+    }
+
+    // Remove active class from all navigation links
+    document.querySelectorAll("nav a").forEach(function(link) {
+        link.classList.remove("active");
+    });
+
+    // Add active class to the current page
+    document.querySelectorAll("nav a").forEach(function(link) {
+
+        let targetPage = link.getAttribute("href");
+
+        if (!targetPage || targetPage === "#") {
+            return;
+        }
+
+        targetPage = targetPage
+            .split("/")
+            .pop()
+            .replace(".html", "");
+
+        if (targetPage === currentPage) {
+            link.classList.add("active");
+        }
+    });
+}
+function adminLogout() {
+
+    localStorage.removeItem("adminLoggedIn");
+
+    alert("Admin logged out successfully.");
+
+    window.location.href = "index.html";
+}
+
+updateNavigation();
+
+
+function apply(company, role) {
+
+    let applications =
+        JSON.parse(localStorage.getItem("applications")) || [];
+
+    let alreadyApplied = applications.some(function(application) {
+        return application.company === company;
+    });
+
+    if (alreadyApplied) {
+        alert("You have already applied to " + company + ".");
+        return;
+    }
+
+    let today = new Date();
+
+    let appliedDate = today.toLocaleDateString("en-GB", {
+        day: "2-digit",
+        month: "short",
+        year: "numeric"
+    });
+
+    let application = {
+        company: company,
+        role: role,
+        date: appliedDate,
+        status: "Applied"
+    };
+
+    applications.push(application);
+
+    localStorage.setItem("applications", JSON.stringify(applications));
+
+    alert("Application submitted successfully for " + company + "!");
+
+    window.location.href = "applications.html";
+}
+
+
+
+</script>
+
+</body>
+</html>

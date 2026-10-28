@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Companies - Student Placement Portal</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>
+    <h2>🎓 Student Placement Portal</h2>
+
+    <nav>
+    <a href="index.html" id="homeLink">Home</a>
+    <a href="companies.html" id="companiesLink">Companies</a>
+    <a href="drives.html" id="drivesLink">Drives</a>
+    <span id="authLinks"></span>
+</nav>
+</header>
+
+<section class="hero">
+    <h1>Our Companies</h1>
+    <p>Explore companies offering placement opportunities.</p>
+</section>
+
+<section class="features">
+
+    <div class="card">
+        <h3>🏢 TCS</h3>
+        <p><strong>Role:</strong> Software Developer</p><br>
+        <p><strong>Package:</strong> ₹7 LPA</p><br>
+        <p><strong>Eligibility:</strong> CGPA 7.0+</p><br>
+        <button onclick="window.location.href='tcs.html'">
+            View Details
+        </button>
+    </div>
+
+    <div class="card">
+        <h3>🏢 Infosys</h3>
+        <p><strong>Role:</strong> System Engineer</p><br>
+        <p><strong>Package:</strong> ₹6 LPA</p><br>
+        <p><strong>Eligibility:</strong> CGPA 6.5+</p><br>
+        <button onclick="window.location.href='infosys.html'">
+            View Details
+        </button>
+    </div>
+
+    <div class="card">
+        <h3>🏢 Wipro</h3>
+        <p><strong>Role:</strong> Project Engineer</p><br>
+        <p><strong>Package:</strong> ₹5.5 LPA</p><br>
+        <p><strong>Eligibility:</strong> CGPA 6.5+</p>
+        <button onclick="window.location.href='wipro.html'">
+            View Details
+        </button>
+    </div>
+
+    <div class="card">
+        <h3>🏢 Accenture</h3>
+        <p><strong>Role:</strong> Associate Software Engineer</p><br>
+        <p><strong>Package:</strong> ₹6 LPA</p><br>
+        <p><strong>Eligibility:</strong> CGPA 7.0+</p><br>
+        <button onclick="window.location.href='accenture.html'">
+            View Details
+        </button>
+    </div>
+
+    <div class="card">
+        <h3>🏢 Cognizant</h3>
+        <p><strong>Role:</strong> Programmer Analyst</p><br>
+        <p><strong>Package:</strong> ₹5 LPA</p><br>
+        <p><strong>Eligibility:</strong> CGPA 6.5+</p><br>
+        <button onclick="window.location.href='cognizant.html'">
+            View Details
+        </button>
+    </div>
+
+    <div class="card">
+        <h3>🏢 Capgemini</h3>
+        <p><strong>Role:</strong> Software Engineer</p><br>
+        <p><strong>Package:</strong> ₹5.5 LPA</p><br>
+        <p><strong>Eligibility:</strong> CGPA 6.0+</p><br>
+        <button onclick="window.location.href='capgemini.html'">
+            View Details
+        </button>
+    </div>
+
+</section>
+
+<footer>
+    <p>© 2026 Student Placement Portal</p>
+</footer>
+
+<script>
+
+function logout() {
+
+    localStorage.removeItem("loggedIn");
+
+    alert("You have been logged out successfully.");
+
+    window.location.href = "index.html";
+}    
+
+// NETLIFY TEST - NEW VERSION
+
+function updateNavigation() {
+
+    let authLinks = document.getElementById("authLinks");
+
+    if (localStorage.getItem("loggedIn") === "true") {
+
+        authLinks.innerHTML = `
+            <a href="dashboard.html">Dashboard</a>
+            <a href="applications.html">My Applications</a>
+            <a href="profile.html">My Profile</a>
+            <a href="#" onclick="logout()">Logout</a>
+        `;
+
+    } else if (localStorage.getItem("adminLoggedIn") === "true") {
+
+        authLinks.innerHTML = `
+            <a href="admin.html">Admin Dashboard</a>
+            <a href="#" onclick="adminLogout()">Logout</a>
+        `;
+
+    } else {
+
+        authLinks.innerHTML = `
+            <a href="login.html">Login</a>
+            <a href="admin-login.html">Admin</a>
+        `;
+    }
+
+    // Get the current page
+    let currentPage = window.location.pathname
+        .split("/")
+        .pop()
+        .replace(".html", "");
+
+    if (currentPage === "") {
+        currentPage = "index";
+    }
+
+    // Remove active class from all navigation links
+    document.querySelectorAll("nav a").forEach(function(link) {
+        link.classList.remove("active");
+    });
+
+    // Add active class to the current page
+    document.querySelectorAll("nav a").forEach(function(link) {
+
+        let targetPage = link.getAttribute("href");
+
+        if (!targetPage || targetPage === "#") {
+            return;
+        }
+
+        targetPage = targetPage
+            .split("/")
+            .pop()
+            .replace(".html", "");
+
+        if (targetPage === currentPage) {
+            link.classList.add("active");
+        }
+    });
+}
+
+function adminLogout() {
+
+    localStorage.removeItem("adminLoggedIn");
+
+    alert("Admin logged out successfully.");
+
+    window.location.href = "index.html";
+}
+
+updateNavigation();
+
+</script>
+
+</body>
+</html>

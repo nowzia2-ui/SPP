@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login - Student Placement Portal</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>
+    <h2>🎓 Student Placement Portal</h2>
+
+    <nav>
+    <a href="index.html">Home</a>
+    <a href="companies.html">Companies</a>
+    <a href="drives.html">Drives</a>
+
+    <span id="authLinks"></span>
+</nav>
+</header>
+
+<div class="login-container">
+
+    <div class="login-card">
+
+        <div class="login-icon">🎓</div>
+
+        <h1>Welcome Back!</h1>
+
+        <p class="login-subtitle">
+            Login to continue to your placement dashboard
+        </p>
+
+        <form onsubmit="login(event)">
+
+            <label for="email">Student Email</label>
+            <input 
+                type="email" 
+                id="email" 
+                placeholder="Enter your college email"
+                required
+            >
+
+            <label for="password">Password</label>
+
+            <div class="password-box">
+                <input 
+                    type="password" 
+                    id="password" 
+                    placeholder="Enter your password"
+                    required
+                >
+
+                <span onclick="togglePassword()">👁️</span>
+            </div>
+
+            <div class="login-options">
+
+                <label class="remember">
+                    <input type="checkbox">
+                    Remember me
+                </label>
+
+                <a href="#">Forgot Password?</a>
+
+            </div>
+
+            <button type="submit" class="login-button">
+                Login
+            </button>
+
+        </form>
+
+        <p class="register-text">
+            Don't have an account?
+            <a href="#">Create Account</a>
+        </p>
+
+    </div>
+
+</div>
+
+<footer>
+    <p>© 2026 Student Placement Portal</p>
+</footer>
+
+<script>
+
+    function togglePassword() {
+
+    let password = document.getElementById("password");
+
+    if (password.type === "password") {
+        password.type = "text";
+    } else {
+        password.type = "password";
+    }
+}
+    function login(event) {
+    event.preventDefault();
+
+    let email = document.getElementById("email").value;
+    let password = document.getElementById("password").value;
+
+    if (email === "" || password === "") {
+        alert("Please enter your email and password.");
+        return;
+    }
+
+    // Save login status
+    localStorage.setItem("loggedIn", "true");
+    localStorage.removeItem("adminLoggedIn");
+
+    // Go to dashboard
+    window.location.href = "dashboard.html";
+}
+
+function updateNavigation() {
+    let authLinks = document.getElementById("authLinks");
+
+    let currentPage = window.location.pathname.split("/").pop();
+
+    if (localStorage.getItem("loggedIn") === "true") {
+        authLinks.innerHTML = `
+            <a href="dashboard.html" class="${currentPage === 'dashboard.html' ? 'active' : ''}">Dashboard</a>
+            <a href="applications.html" class="${currentPage === 'applications.html' ? 'active' : ''}">My Applications</a>
+            <a href="profile.html" class="${currentPage === 'profile.html' ? 'active' : ''}">My Profile</a>
+            <a href="#" onclick="logout()">Logout</a>
+        `;
+    } else if (localStorage.getItem("adminLoggedIn") === "true") {
+        authLinks.innerHTML = `
+            <a href="admin.html" class="${currentPage === 'admin.html' ? 'active' : ''}">Admin Dashboard</a>
+            <a href="#" onclick="adminLogout()">Logout</a>
+        `;
+    } else {
+        authLinks.innerHTML = `
+            <a href="login.html" class="${currentPage === 'login.html' ? 'active' : ''}">Login</a>
+            <a href="admin-login.html" class="${currentPage === 'admin-login.html' ? 'active' : ''}">Admin</a>
+        `;
+    }
+}
+
+function adminLogout() {
+
+    localStorage.removeItem("adminLoggedIn");
+
+    alert("Admin logged out successfully.");
+
+    window.location.href = "index.html";
+}
+
+updateNavigation();
+
+</script>
+
+</body>
+</html>

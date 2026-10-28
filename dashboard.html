@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard - Student Placement Portal</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>
+    <h2>🎓 Student Placement Portal</h2>
+
+    <nav>
+    <a href="index.html">Home</a>
+    <a href="companies.html">Companies</a>
+    <a href="drives.html">Drives</a>
+
+    <span id="authLinks"></span>
+    
+</nav>
+</header>
+
+<section class="dashboard">
+
+    <div class="welcome">
+    <h1>Welcome, <span id="studentName">Student</span>! 👋</h1>
+    <p>Here's an overview of your placement activities.</p>
+</div>
+
+    <!-- Statistics -->
+
+    <div class="dashboard-cards">
+
+        <div class="card">
+            <h3>🏢 Companies</h3>
+            <h2>12</h2>
+            <p>Companies visiting campus</p>
+        </div>
+
+        <div class="card">
+            <h3>🎓 CGPA</h3>
+            <h2 id="studentCgpa">--</h2>
+            <p>Current academic performance</p>
+        </div>
+
+        <div class="card">
+            <h3>💼 Placement Drives</h3>
+            <h2>8</h2>
+            <p>Upcoming opportunities</p>
+        </div>
+
+        <div class="card">
+            <h3>📄 Applications</h3>
+            <h2 id="applicationCount">0</h2>
+            <p>Applications submitted</p>
+        </div>
+
+        <div class="card">
+            <h3>✅ Selected</h3>
+            <h2>1</h2>
+            <p>Selection status</p>
+        </div>
+
+    </div>
+
+    <!-- Upcoming Drives -->
+
+    <div class="dashboard-section">
+
+        <h2>📅 Upcoming Placement Drives</h2>
+
+        <div class="drive-item">
+            <div>
+                <h3>TCS</h3>
+                <p>Software Developer</p>
+            </div>
+
+            <span>15 Sep 2026</span>
+        </div>
+
+        <div class="drive-item">
+            <div>
+                <h3>Infosys</h3>
+                <p>System Engineer</p>
+            </div>
+
+            <span>18 Sep 2026</span>
+        </div>
+
+        <div class="drive-item">
+            <div>
+                <h3>Wipro</h3>
+                <p>Graduate Engineer Trainee</p>
+            </div>
+
+            <span>22 Sep 2026</span>
+        </div>
+
+    </div>
+
+    <!-- Applications -->
+
+    <div class="dashboard-section">
+
+        <h2>📄 Recent Applications</h2>
+
+        <div class="application-item">
+            <strong>TCS</strong>
+            <span class="status applied">Applied</span>
+        </div>
+
+        <div class="application-item">
+            <strong>Infosys</strong>
+            <span class="status shortlisted">Shortlisted</span>
+        </div>
+
+        <div class="application-item">
+            <strong>Wipro</strong>
+            <span class="status pending">Pending</span>
+        </div>
+
+    </div>
+
+</section>
+
+<footer>
+    <p>© 2026 Student Placement Portal</p>
+</footer>
+<script>
+
+function logout() {
+
+    localStorage.removeItem("loggedIn");
+
+    alert("You have been logged out successfully.");
+
+    window.location.href = "index.html";
+}    
+
+function updateNavigation() {
+    let authLinks = document.getElementById("authLinks");
+
+    let currentPage = window.location.pathname.split("/").pop();
+
+    if (localStorage.getItem("loggedIn") === "true") {
+        authLinks.innerHTML = `
+            <a href="dashboard.html" class="${currentPage === 'dashboard.html' ? 'active' : ''}">Dashboard</a>
+            <a href="applications.html" class="${currentPage === 'applications.html' ? 'active' : ''}">My Applications</a>
+            <a href="profile.html" class="${currentPage === 'profile.html' ? 'active' : ''}">My Profile</a>
+            <a href="#" onclick="logout()">Logout</a>
+        `;
+    } else if (localStorage.getItem("adminLoggedIn") === "true") {
+        authLinks.innerHTML = `
+            <a href="admin.html" class="${currentPage === 'admin.html' ? 'active' : ''}">Admin Dashboard</a>
+            <a href="#" onclick="adminLogout()">Logout</a>
+        `;
+    } else {
+        authLinks.innerHTML = `
+            <a href="login.html" class="${currentPage === 'login.html' ? 'active' : ''}">Login</a>
+            <a href="admin-login.html" class="${currentPage === 'admin-login.html' ? 'active' : ''}">Admin</a>
+        `;
+    }
+}
+
+function adminLogout() {
+
+    localStorage.removeItem("adminLoggedIn");
+
+    alert("Admin logged out successfully.");
+
+    window.location.href = "index.html";
+}
+
+updateNavigation();
+
+</script>
+<script>
+
+if (localStorage.getItem("loggedIn") !== "true") {
+    window.location.href = "login.html";
+}
+
+function updateApplicationCount() {
+
+    let applications =
+        JSON.parse(localStorage.getItem("applications")) || [];
+
+    document.getElementById("applicationCount").textContent =
+        applications.length;
+}
+
+updateApplicationCount();
+
+function loadStudentProfile() {
+
+    let profile =
+        JSON.parse(localStorage.getItem("studentProfile"));
+
+    if (profile) {
+
+        document.getElementById("studentName").textContent =
+            profile.name;
+
+        document.getElementById("studentCgpa").textContent =
+            profile.cgpa;
+    }
+}
+
+loadStudentProfile();
+
+</script>
+
+</body>
+</html>
